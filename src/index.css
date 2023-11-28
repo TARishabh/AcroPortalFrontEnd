@@ -1,0 +1,114 @@
+/* body {
+  overflow: hidden;
+  height: 100vh;
+} */
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.pink-background {
+  flex: 2; /* Adjusted to 40% */
+  background-color: #c4779d;
+  height: 100vh;
+}
+
+.login-form {
+  flex: 3; /* Adjusted to 60% */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.rounded-input {
+  width: 125%;
+  padding: 10px;
+  border: 1px solid #E7E7E9; /* Set the default border color and width */
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+.continue-button {
+  width: 50%;
+  margin-top: 20px; /* Add margin to the top for spacing */
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  background-color: #c4779d; /* Background color for the button */
+  color: white; /* Text color for the button */
+  cursor: pointer;
+  font-size: 20px;
+  align-self: center; /* Align the button to the center */
+  display: block; /* Make it a block-level element */
+  margin-left: auto; /* Set left margin to auto */
+  margin-right: auto; /* Set right margin to auto */
+}
+/* Add these styles in your CSS file or style tag */
+.mark-attendance-container {
+  padding: 20px;
+}
+
+.centered-heading {
+  text-align: center;
+}
+
+.flex-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.flex-container-date{
+  margin-left: 130px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 250px; /* Adjust the width as needed */
+  margin-bottom: 10px;
+}
+
+/* Apply rounded styles to the input fields */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 0;
+  /* background-color: pink; */
+}
+
+/* Container for the label and input field */
+.input-group label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.users-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-row {
+  /* width: calc(10% - 60px);  */
+  width: 8%;
+  height: 80px;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-top: 130px;
+  text-align: center;
+  font-size: 30px;
+}
+
