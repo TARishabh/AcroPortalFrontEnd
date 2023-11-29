@@ -84,28 +84,28 @@ export default function MarkAttendance() {
                     <input className='my-2' style={{ width: "30%" }} type='date' id='date' name='date' value={selectedDate.toISOString().split('T')[0]} onChange={(e) => setSelectedDate(new Date(e.target.value))}></input>
                 </div>
             </div>
-            <div className="container d-flex custom-margin-user-container">
-                {showStudents && users.sort((a, b) => parseInt(a.enrollment_number.slice(10, 12)) - parseInt(b.enrollment_number.slice(11, 13)))
-                    .map((user) => (
-                        <div key={user._id} className="card mx-3" style={{ width: "8rem" }}>
-                            <button
-                                type="button"
-                                className="btn btn-card-body"
-                                onClick={() => onclickUser(user._id)}
-                                style={{ backgroundColor: checkIfUserSelected(user._id) ? '#c4779d' : '#D9D9D9', padding: 0, border: 'none' }}
-                            >
-                                <div className="card-body">
-                                    <h5 className="card-title text-center">{user.enrollment_number.slice(10, 12)}</h5>
-                                </div>
-                            </button>
-                        </div>
-                    ))
+            <div className="container custom-margin-user-container d-flex flex-wrap">
+                {showStudents &&
+                    users.sort((a, b) => parseInt(a.enrollment_number.slice(10, 12)) - parseInt(b.enrollment_number.slice(11, 13)))
+                        .map((user, index) => (
+                            <div key={user._id} className="card mx-3 mb-3" style={{ width: "8rem" }}>
+                                <button
+                                    type="button"
+                                    className="btn btn-card-body"
+                                    onClick={() => onclickUser(user._id)}
+                                    style={{ backgroundColor: checkIfUserSelected(user._id) ? '#c4779d' : '#D9D9D9', padding: 0, border: 'none' }}
+                                >
+                                    <div className="card-body">
+                                        <h5 className="card-title text-center">{user.enrollment_number.slice(10, 12)}</h5>
+                                    </div>
+                                </button>
+                            </div>
+                        ))
                 }
             </div>
         </div>
-    )
+    );
 }
-
 
 
 
