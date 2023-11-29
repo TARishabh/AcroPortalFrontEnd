@@ -42,7 +42,12 @@ const Login = (props) => {
 
     return (
         <div className="login-container">
-            <div className="pink-background"></div>
+            <div className="pink-background">
+                {/* <h1 style={{    color: white;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: bold;}}><b>Welcome</b></h1> */}
+            </div>
             <div className="login-form">
                 <h1 style={{ marginBottom: '50px' }}>Login</h1>
                 <form>

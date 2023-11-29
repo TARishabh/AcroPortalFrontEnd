@@ -59,7 +59,7 @@ export default function Register() {
             navigate('/login')
         }
         else{
-            SetAlert('Invalid Credentials', 'danger');
+            // SetAlert('Invalid Credentials', 'danger');
         }
     };
 

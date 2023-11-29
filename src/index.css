@@ -15,6 +15,16 @@
   height: 100vh;
 }
 
+@media (min-width: 0px) and (max-width:480px){
+  .pink-background {
+    flex: 2; /* Adjusted to 40% */
+    background-color: black;
+    /* height: 100vh; */
+    height: 100%;
+  }
+}
+
+
 .login-form {
   flex: 3; /* Adjusted to 60% */
   display: flex;
@@ -112,3 +122,11 @@ select {
   font-size: 30px;
 }
 
+.custom-margin {
+  margin-top: 3%;
+  margin-left: 25%; /* Adjust the percentage as needed */
+}
+
+.custom-margin-user-container{
+  margin-top: 3%;
+}
