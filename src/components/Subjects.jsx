@@ -14,11 +14,10 @@ export default function Subjects() {
             },
         });
         const res = await response.json();
-        console.log(res);
     }
     return (
         <div>
-
+            
         </div>
     )
 }

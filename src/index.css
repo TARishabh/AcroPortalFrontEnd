@@ -13,15 +13,7 @@
   flex: 2; /* Adjusted to 40% */
   background-color: #c4779d;
   height: 100vh;
-}
-
-@media (min-width: 0px) and (max-width:480px){
-  .pink-background {
-    flex: 2; /* Adjusted to 40% */
-    background-color: black;
-    /* height: 100vh; */
-    height: 100%;
-  }
+  color: white;
 }
 
 
@@ -58,6 +50,23 @@
   margin-left: auto; /* Set left margin to auto */
   margin-right: auto; /* Set right margin to auto */
 }
+
+/*.mark-button{
+  background-color: #c4779d;
+  padding: 12px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border: none;
+  border-radius: 50px;
+  background-color: #c4779d;
+  color: white;
+  cursor: pointer;
+  font-size: 25px;
+  align-self: center; 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
+}*/
 /* Add these styles in your CSS file or style tag */
 .mark-attendance-container {
   padding: 20px;
@@ -129,4 +138,40 @@ select {
 
 .custom-margin-user-container{
   margin-top: 3%;
+}
+
+/* @media (min-width: 319px) and (max-width:480px){
+  body {
+  background-color: lightsalmon;
+}
+} */
+
+.attendance-text{
+  font-size: 5rem;
+  margin-left:5rem;
+  margin-top: 10rem;
+  font-weight: auto;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.made-text{
+  font-size: 5rem;
+  margin-left:12rem;
+  margin-top: 9rem;
+  font-weight: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.simple-text{
+  font-size: 5rem;
+  margin-left:10rem;
+  margin-top: 10rem;
+  font-weight: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.welcome-text{
+  position: absolute;
+  top: 10%;
 }

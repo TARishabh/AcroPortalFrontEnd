@@ -18,16 +18,16 @@ export default function EnterPassword() {
             body: JSON.stringify({email:email,password:password}),
         });
         const res = await response.json();
-        console.log(res);
         if (res.results ){
             localStorage.setItem('token',res.results)
             updateToken(res.results);
             SetAlert(res.message,'success');
             if (res.user_type === 'Student'){
-                navigate('/home');
+                navigate('/viewattendance');
             }
             else if (res.user_type === 'Faculty'){
                 navigate('/markattendance');
+                SetAlert('success','success')
             }
         }
         else{
@@ -37,8 +37,13 @@ export default function EnterPassword() {
 
     return (
         <div className="login-container">
-            <div className="pink-background"></div>
+            <div className="pink-background">
+                <h1 className='attendance-text'><strong>ATTENDANCE</strong></h1>
+                <h1 className='made-text'><strong>MADE</strong></h1>
+                <h1 className='simple-text'><strong>SIMPLE.</strong></h1>
+            </div>
             <div className="login-form">
+            <h1 className='welcome-text'>WELCOME TO ACROPORTAL</h1>
                 <h1 style={{ marginBottom: '50px' }}>Login</h1>
                 <form>
                         <div>

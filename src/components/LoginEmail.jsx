@@ -1,6 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
+
+
+// #TODO  BUTTONS DAALNE HAI 3 ->  MARK ALL PRESENT ALL ABSENT ALL 
+// #TODO  dark mode daalna hai
+// #TODO view attendance ka page banana hai
+// #TODO modal banana hai student ki display ke liye
+// #TODO profile page banana hai User ka
+// #TODO double click pe student ka ek modal ka dikhana hai
+
 const Login = (props) => {
     const host = 'http://127.0.0.1:3000';
     const { SetAlert } = props;
@@ -26,16 +35,15 @@ const Login = (props) => {
             body: JSON.stringify({email:email}),
         });
         const res = await response.json();
-        console.log(res);
+        {console.log(res)};
         if (res.results === true){
             updatedMail(email);
             navigate('/enterpassword');
+            SetAlert('Email Verified','success');
         }
         else if (res.results === false){
             navigate('/register');
-        }
-        else{
-            SetAlert('Invalid Credentials', 'danger');
+            SetAlert('Please Register','success');
         }
     };
 
@@ -43,13 +51,15 @@ const Login = (props) => {
     return (
         <div className="login-container">
             <div className="pink-background">
-                {/* <h1 style={{    color: white;
-    text-align: center;
-    font-family: system-ui;
-    font-weight: bold;}}><b>Welcome</b></h1> */}
+                <h1 className='attendance-text'><strong>ATTENDANCE</strong></h1>
+                <h1 className='made-text'><strong>MADE</strong></h1>
+                <h1 className='simple-text'><strong>SIMPLE.</strong></h1>
             </div>
             <div className="login-form">
-                <h1 style={{ marginBottom: '50px' }}>Login</h1>
+            <h1 className='welcome-text'>WELCOME TO ACROPORTAL</h1>
+            <div id="alert-container">
+            </div>
+                <h2 style={{ marginBottom: '50px' }}>Login</h2>
                 <form>
                     <div>
                         <strong><label htmlFor="email">Email:</label></strong>
