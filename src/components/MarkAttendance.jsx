@@ -84,11 +84,15 @@ export default function MarkAttendance(props) {
         hour12: false, // Use 24-hour format
     };
 
-    const formattedTime = now.toLocaleTimeString('en-US', options);
+    let formattedTime = now.toLocaleTimeString('en-US', options);
+
 
     const markAttendanceOfStudents = async () => {
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU2OGE0NDdkM2VmNjU1ZjIzOTQxZTBlIn0sImlhdCI6MTcwMTM1NjY0N30.-OCMy6P9991KMm8eGJF-dM9IND7Rh1FTkAi6AfwJ0JM';
         const formattedDateReturned = formatDate(selectedDate);
+        if (formattedTime[0] === '2' && formattedTime[1] === '4'){
+            formattedTime = '00:00'
+        };
         const data = {
             student_id: selectedStudents,
             subject_id: selectedSubject,

@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 
 
-// #TODO  BUTTONS DAALNE HAI 3 ->  MARK ALL PRESENT ALL ABSENT ALL 
+// #TODO  BUTTONS DAALNE HAI 2 ->  MARK, ALL PRESENT  
 // #TODO  dark mode daalna hai
 // #TODO view attendance ka page banana hai
 // #TODO modal banana hai student ki display ke liye
 // #TODO profile page banana hai User ka
-// #TODO double click pe student ka ek modal ka dikhana hai
+
 
 const Login = (props) => {
     const host = 'http://127.0.0.1:3000';
