@@ -47,8 +47,8 @@ export default function ViewAttendance(props) {
         return formattedDate;
     };
 
-    
-    const updateAttendancesBySubject = async(e) =>{
+
+    const updateAttendancesBySubject = async (e) => {
         setSelectedSubject(e.target.value);
         const response = await fetch(`${host}/attendance/viewattendance`, {
             method: 'POST',
@@ -56,14 +56,14 @@ export default function ViewAttendance(props) {
                 'Content-Type': 'application/json',
                 'Authorization': token
             },
-            body: JSON.stringify({subject_id:e.target.value})
+            body: JSON.stringify({ subject_id: e.target.value })
         });
         const res = await response.json();
         console.log(res);
         setAttendanceResults(res.results);
     };
 
-    const updateAttendancesByDate = async(e) =>{
+    const updateAttendancesByDate = async (e) => {
         setSelectedDate(new Date(e.target.value));
         const formattedDate = formatDate(new Date(e.target.value));
         const response = await fetch(`${host}/attendance/viewattendance`, {
@@ -72,7 +72,7 @@ export default function ViewAttendance(props) {
                 'Content-Type': 'application/json',
                 'Authorization': token
             },
-            body: JSON.stringify({date:formattedDate})
+            body: JSON.stringify({ date: formattedDate })
         });
         const res = await response.json();
         console.log(res);
@@ -105,18 +105,21 @@ export default function ViewAttendance(props) {
                     <input className='my-2 form-control' style={{ width: "15rem" }} type='date' id='date' name='date' value={selectedDate.toISOString().split('T')[0]} onChange={updateAttendancesByDate}></input>
                 </div>
             </div>
+            <div className="d-flex justify-content-center mt-3">
+                <span><strong>Total Attendance Count: {attendanceResults.length}</strong></span>
+            </div>
             <div className="container custom-margin-user-container">
                 {attendanceResults.map((attendance, index) => (
                     <div
                         key={attendance._id}
                         className={`row mb-3`}
-                        style={{ padding: '10px', borderRadius: '5px',backgroundColor:`${index % 2 === 0 ? '#c4779d' : '#d9d9d9'}`,color:`${index % 2 === 0 ? 'white' : 'black'}`}}
+                        style={{ padding: '10px', borderRadius: '5px', backgroundColor: `${index % 2 === 0 ? '#c4779d' : '#d9d9d9'}`, color: `${index % 2 === 0 ? 'white' : 'black'}` }}
                     >
                         <div className="col">
-                        <strong>{subjects.find(sub => sub._id === attendance.subject_id)?.name}</strong>
+                            <strong>{subjects.find(sub => sub._id === attendance.subject_id)?.name}</strong>
                         </div>
                         <div className="col">
-                            <strong>{formatDate(attendance.date)}</strong> 
+                            <strong>{formatDate(attendance.date)}</strong>
                         </div>
                     </div>
                 ))}

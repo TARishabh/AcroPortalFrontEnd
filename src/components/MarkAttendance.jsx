@@ -13,6 +13,8 @@ export default function MarkAttendance(props) {
     const now = new Date();
     const host = 'http://127.0.0.1:3000';
     const [selectAll, setSelectAll] = useState(false);
+    const [selectedUserDetails, setSelectedUserDetails] = useState(null);
+
 
     useEffect(() => {
         const fetchsubjects = async () => {
@@ -43,6 +45,8 @@ export default function MarkAttendance(props) {
         fetchUsers();
         fetchsubjects();
     }, [context]);
+
+
     const onclickUser = (currentUser) => {
         if (checkIfUserSelected(currentUser)) {
             const removedStudents = selectedStudents.filter((student) => (student !== currentUser))
@@ -90,7 +94,7 @@ export default function MarkAttendance(props) {
     const markAttendanceOfStudents = async () => {
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU2OGE0NDdkM2VmNjU1ZjIzOTQxZTBlIn0sImlhdCI6MTcwMTM1NjY0N30.-OCMy6P9991KMm8eGJF-dM9IND7Rh1FTkAi6AfwJ0JM';
         const formattedDateReturned = formatDate(selectedDate);
-        if (formattedTime[0] === '2' && formattedTime[1] === '4'){
+        if (formattedTime[0] === '2' && formattedTime[1] === '4') {
             formattedTime = '00:00'
         };
         const data = {
@@ -148,6 +152,20 @@ export default function MarkAttendance(props) {
         };
     }
 
+
+    const onDoubleClickUser = (user_id) => {
+        // Find the selected user details
+        const selectedUser = users.find((user) => user._id === user_id);
+
+        // Set the details to open in the modal
+        setSelectedUserDetails(selectedUser);
+
+        // Open the Bootstrap modal
+        const modal = new window.bootstrap.Modal(document.getElementById('userDetailsModal'));
+        modal.show();
+    };
+
+
     return (
         <div className='container'>
             <h2 className='my-3 text-center'>Mark Attendance</h2>
@@ -174,7 +192,7 @@ export default function MarkAttendance(props) {
             </div>
             <div className="d-flex justify-content-between align-items-center my-3">
                 <div className="form-check">
-                    <input style={{border:'1px solid'}}
+                    <input style={{ border: '1px solid' }}
                         type="checkbox"
                         className="form-check-input"
                         id="selectAllCheckbox"
@@ -195,6 +213,7 @@ export default function MarkAttendance(props) {
                                     type="button"
                                     className="btn btn-card-body"
                                     onClick={() => onclickUser(user._id)}
+                                    onDoubleClick={()=> onDoubleClickUser(user._id)}
                                     style={{ backgroundColor: checkIfUserSelected(user._id) ? '#c4779d' : '#D9D9D9', padding: 0, border: 'none' }}
                                 >
                                     <div className="card-body">
@@ -204,6 +223,29 @@ export default function MarkAttendance(props) {
                             </div>
                         ))
                 }
+            </div>
+            <div className="modal fade" id="userDetailsModal" tabIndex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="userDetailsModalLabel">User Details</h5>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            {/* Display user details here */}
+                            {selectedUserDetails && (
+                                <div>
+                                    <p style={{fontWeight:'bolder',fontSize:'1.2rem'}}><span style={{fontWeight:'bold'}}>Name: </span>{`${selectedUserDetails.first_name} ${selectedUserDetails.last_name}`}</p>
+                                    <p style={{fontWeight:'bolder',fontSize:'1.2rem'}}><span style={{fontWeight:'bold'}}>Email:</span> {selectedUserDetails.email}</p>
+                                    <p style={{fontWeight:'bolder',fontSize:'1.2rem'}}><span style={{fontWeight:'bold'}}>Enrollment Number:</span> {selectedUserDetails.enrollment_number}</p>
+                                </div>
+                            )}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="d-flex justify-content-center">
                 <button onClick={markAttendanceOfStudents} style={{ backgroundColor: '#c4779d', borderRadius: '50px', color: 'white', padding: '8px 20px', fontSize: '1.5rem', textAlign: 'center' }} type="button" className="btn mt-3">Mark</button>
