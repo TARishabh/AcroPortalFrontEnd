@@ -44,7 +44,7 @@ export default function EnterPassword() {
             </div>
             <div className="login-form">
             <h1 className='welcome-text'>WELCOME TO ACROPORTAL</h1>
-                <h1 style={{ marginBottom: '50px' }}>Login</h1>
+                <h1 className='login-text' style={{ marginBottom: '50px' }}>Login</h1>
                 <form>
                         <div>
                             <strong><label htmlFor="password">Password:</label></strong>

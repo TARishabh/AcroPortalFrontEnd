@@ -96,8 +96,8 @@ export default function Register(props) {
                 <h1 className='simple-text'><strong>SIMPLE.</strong></h1>
             </div>
             <div className="login-form">
-                <h1 style={{ position: 'absolute', top: '3%' }}>WELCOME TO ACROPORTAL</h1>
-                <h2 style={{ marginBottom: '50px' }}>Create Account</h2>
+                <h1 className='welcome-text-create'>WELCOME TO ACROPORTAL</h1>
+                <h2 className='create-acctount-text'>Create Account</h2>
                 <form>
                     <div>
                         <strong><label htmlFor="email">Email:</label></strong>

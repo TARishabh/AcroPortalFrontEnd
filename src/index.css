@@ -1,3 +1,4 @@
+
 .login-container {
   display: flex;
   height: 100vh;
@@ -10,8 +11,6 @@
   height: 100vh;
   color: white;
 }
-
-
 .login-form {
   flex: 3; /* Adjusted to 60% */
   display: flex;
@@ -22,13 +21,31 @@
   padding: 20px;
   border-radius: 10px;
 }
-
 .rounded-input {
   width: 125%;
   padding: 10px;
-  border: 1px solid #E7E7E9; /* Set the default border color and width */
+  border: 1.5px solid rgb(206, 89, 206);
   border-radius: 50px;
   margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .pink-background {
+    display: none;
+  }
+
+  .login-form {
+    flex: 1; /* Adjusted to 100% */
+    border-radius: 0; /* Remove border radius for full width */
+  }
+
+  .rounded-input {
+    width: 100%; /* Set input width to 100% on smaller screens */
+  }
+  .welcome-text {
+    position: static; /* Change to static for smaller screens */
+    margin-top: 20px; /* Add margin for spacing on smaller screens */
+  }
 }
 .continue-button {
   width: 50%;
@@ -152,7 +169,34 @@ select {
 .welcome-text{
   position: absolute;
   top: 10%;
+  font-weight: bolder;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+.welcome-text-create{
+  position: absolute;
+  top: 4%;
+  font-weight: bolder;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.create-acctount-text{
+  margin-bottom: 30px;
+  font: bold 24px/29px "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.login-text{
+  font: bold 24px/29px "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+label.email-text{
+  font-family:"Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bolder;
+}
+
+
 
 .mark-attendance-container {
   max-width: 100%;

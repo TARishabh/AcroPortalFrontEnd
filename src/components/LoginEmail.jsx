@@ -59,10 +59,11 @@ const Login = (props) => {
             <h1 className='welcome-text'>WELCOME TO ACROPORTAL</h1>
             <div id="alert-container">
             </div>
-                <h2 style={{ marginBottom: '50px' }}>Login</h2>
+                <h2 className='login-text' style={{ marginBottom: '50px' }}>Login</h2>
                 <form>
                     <div>
-                        <strong><label htmlFor="email">Email:</label></strong>
+                        {/* <strong><label htmlFor="email">Email:</label></strong> */}
+                        <label className='email-text' htmlFor="email">Email:</label>
                         <input
                             type="email"
                             id="email"
