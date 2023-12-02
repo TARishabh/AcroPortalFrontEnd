@@ -2,11 +2,13 @@ import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 
-export default function EnterPassword() {
-    const host = 'http://127.0.0.1:3000';
+export default function EnterPassword(props) {
+    const { SetAlert } = props;
+    const host = import.meta.env.VITE_BACKEND_URL
     const [password, setPassword] = useState('');
     const context = useContext(UserContext);
-    const { email,updateToken } = context;
+    const { email,updateToken,updateUserType } = context;
+    const navigate = useNavigate();
 
     const handleOnSubmit = async(e) =>{
         e.preventDefault();
@@ -19,20 +21,22 @@ export default function EnterPassword() {
         });
         const res = await response.json();
         if (res.results ){
-            localStorage.setItem('token',res.results)
+            localStorage.setItem('Authorization',res.results);
             updateToken(res.results);
+            updateUserType(res.user_type);
             SetAlert(res.message,'success');
             if (res.user_type === 'Student'){
                 navigate('/viewattendance');
+                SetAlert('success','success');
             }
             else if (res.user_type === 'Faculty'){
                 navigate('/markattendance');
-                SetAlert('success','success')
+                SetAlert('success','success');
             }
         }
         else{
             SetAlert('Invalid Credentials', 'danger');
-        }
+        };
     }
 
     return (

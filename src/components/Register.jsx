@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 export default function Register(props) {
     const { SetAlert } = props;
-    const host = 'http://127.0.0.1:3000';
+    const host = import.meta.env.VITE_BACKEND_URL
     const [secretkey, setSecretKey] = useState('');
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
@@ -33,6 +33,9 @@ export default function Register(props) {
     const handleCheckState = async (e) => {
         e.preventDefault();
 
+        if (password !== confirmpassword){
+            SetAlert("Password Fields Doesn't Match",'danger');
+        }
         // You can add additional validation logic here before making the fetch call
         let data = {
             email: email,
@@ -186,7 +189,7 @@ export default function Register(props) {
                             />
                         </div>
                     )}
-                    <button disabled={!checkstate} onClick={handleCheckState} className='continue-button' type="submit"><strong>Continue</strong></button>
+                    <button onClick={handleCheckState} className='continue-button' type="submit"><strong>Continue</strong></button>
                 </form>
             </div>
         </div>

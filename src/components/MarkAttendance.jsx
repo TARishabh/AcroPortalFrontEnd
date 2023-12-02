@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
 import UserContext from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function MarkAttendance(props) {
     const { SetAlert } = props;
@@ -11,14 +12,17 @@ export default function MarkAttendance(props) {
     const [showStudents, setShowStudents] = useState(true);
     const context = useContext(UserContext);
     const now = new Date();
-    const host = 'http://127.0.0.1:3000';
+    const host = import.meta.env.VITE_BACKEND_URL
     const [selectAll, setSelectAll] = useState(false);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
-
-
+    const {userType} = context;
+    const navigate = useNavigate();
+    const token = localStorage.getItem('Authorization');
     useEffect(() => {
+        if (userType === 'Student'){
+            navigate('/viewattendance')
+        }
         const fetchsubjects = async () => {
-            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1OTA3YzgwODJhZTRkZDVkZDJkMzM5In0sImlhdCI6MTcwMTA5MDE2OX0.MI3lEwylnpkyIW7o8SLyzxHIvygSq3ROYKEPxiiV1oM'
             const response = await fetch(`${host}/attendance/getsubjects`, {
                 method: 'POST',
                 headers: {
@@ -30,7 +34,6 @@ export default function MarkAttendance(props) {
             setSubjects(res.results);
         };
         const fetchUsers = async () => {
-            const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU1OTA3YzgwODJhZTRkZDVkZDJkMzM5In0sImlhdCI6MTcwMTA5MDE2OX0.MI3lEwylnpkyIW7o8SLyzxHIvygSq3ROYKEPxiiV1oM';
             const response = await fetch(`${host}/user/getallusers`, {
                 method: 'POST',
                 headers: {
@@ -92,7 +95,6 @@ export default function MarkAttendance(props) {
 
 
     const markAttendanceOfStudents = async () => {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjU2OGE0NDdkM2VmNjU1ZjIzOTQxZTBlIn0sImlhdCI6MTcwMTM1NjY0N30.-OCMy6P9991KMm8eGJF-dM9IND7Rh1FTkAi6AfwJ0JM';
         const formattedDateReturned = formatDate(selectedDate);
         if (formattedTime[0] === '2' && formattedTime[1] === '4') {
             formattedTime = '00:00'
@@ -105,7 +107,6 @@ export default function MarkAttendance(props) {
             section: "DS",
             year: 'III',
         }
-        console.log(data);
         const response = await fetch(`${host}/attendance/markattendance`, {
             method: 'POST',
             headers: {
@@ -115,7 +116,6 @@ export default function MarkAttendance(props) {
             body: JSON.stringify(data),
         });
         const res = await response.json();
-        console.log(res);
         if (res.results) {
             // navigate('/login')
         }
@@ -168,7 +168,7 @@ export default function MarkAttendance(props) {
 
     return (
         <div className="mark-attendance-container">
-            <h2 className="mark-attendance-heading">MARK ATTENDANCE</h2>
+            <h2 className="mark-attendance-heading"><strong>MARK ATTENDANCE</strong></h2>
             <form className="mark-attendance-form">
                 <div className="d-flex">
                     {/* Subject Field */}
@@ -276,98 +276,3 @@ export default function MarkAttendance(props) {
         </div>
     );
 };
-
-
-
-
-
-
-
-
-//     return (
-//         <div className='container'>
-//             <h2 className='my-3 text-center'>Mark Attendance</h2>
-//             <div className='d-flex custom-margin'>
-//                 <div className="container">
-//                     <label htmlFor="subject"><strong>Select Subject:</strong></label><br />
-//                     <select className='my-2 form-control' style={{ width: "20rem" }} id="subject" name="subject" value={selectedSubject} onChange={(e) => { setSelectedSubject(e.target.value); }}>
-//                         <option value="" disabled>
-//                             Select a subject
-//                         </option>
-//                         {subjects.length > 0 &&
-//                             subjects.map((subject) => (
-//                                 <option key={subject._id} value={subject._id}>
-//                                     {subject.name} - {subject.code}
-//                                 </option>
-//                             ))
-//                         }
-//                     </select>
-//                 </div>
-//                 <div className='container'>
-//                     <label htmlFor="date"><strong>Select Date:</strong></label><br />
-//                     <input className='my-2 form-control' style={{ width: "15rem" }} type='date' id='date' name='date' value={selectedDate.toISOString().split('T')[0]} onChange={(e) => setSelectedDate(new Date(e.target.value))}></input>
-//                 </div>
-//             </div>
-// <div className="d-flex justify-content-between align-items-center my-3">
-//     <div className="form-check">
-//         <input style={{ border: '1px solid' }}
-//             type="checkbox"
-//             className="form-check-input"
-//             id="selectAllCheckbox"
-//             checked={selectAll}
-//             onChange={handleSelectAllChange}
-//         />
-//         <label className="form-check-label mx-2" htmlFor="selectAllCheckbox">
-//             <strong>Mark All Present</strong>
-//         </label>
-//     </div>
-// </div>
-//             <div className="container custom-margin-user-container d-flex flex-wrap">
-//                 {showStudents &&
-//                     users.sort((a, b) => parseInt(a.enrollment_number.slice(10, 12)) - parseInt(b.enrollment_number.slice(11, 13)))
-//                         .map((user, index) => (
-//                             <div key={user._id} className="card mx-3 mb-3" style={{ width: "8rem" }}>
-//                                 <button
-//                                     type="button"
-//                                     className="btn btn-card-body"
-//                                     onClick={() => onclickUser(user._id)}
-//                                     onDoubleClick={()=> onDoubleClickUser(user._id)}
-//                                     style={{ backgroundColor: checkIfUserSelected(user._id) ? '#c4779d' : '#D9D9D9', padding: 0, border: 'none' }}
-//                                 >
-//                                     <div className="card-body">
-//                                         <h5 className="card-title text-center">{user.enrollment_number.slice(10, 12)}</h5>
-//                                     </div>
-//                                 </button>
-//                             </div>
-//                         ))
-//                 }
-//             </div>
-            // <div className="modal fade" id="userDetailsModal" tabIndex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
-            //     <div className="modal-dialog">
-            //         <div className="modal-content">
-            //             <div className="modal-header">
-            //                 <h5 className="modal-title" id="userDetailsModalLabel">User Details</h5>
-            //                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            //             </div>
-            //             <div className="modal-body">
-            //                 {/* Display user details here */}
-            //                 {selectedUserDetails && (
-            //                     <div>
-            //                         <p style={{fontWeight:'bolder',fontSize:'1.2rem'}}><span style={{fontWeight:'bold'}}>Name: </span>{`${selectedUserDetails.first_name} ${selectedUserDetails.last_name}`}</p>
-            //                         <p style={{fontWeight:'bolder',fontSize:'1.2rem'}}><span style={{fontWeight:'bold'}}>Email:</span> {selectedUserDetails.email}</p>
-            //                         <p style={{fontWeight:'bolder',fontSize:'1.2rem'}}><span style={{fontWeight:'bold'}}>Enrollment Number:</span> {selectedUserDetails.enrollment_number}</p>
-            //                     </div>
-            //                 )}
-            //             </div>
-            //             <div className="modal-footer">
-            //                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>
-//             <div className="d-flex justify-content-center">
-//                 <button onClick={markAttendanceOfStudents} style={{ backgroundColor: '#c4779d', borderRadius: '50px', color: 'white', padding: '8px 20px', fontSize: '1.5rem', textAlign: 'center' }} type="button" className="btn mt-3">Mark</button>
-//             </div>
-//         </div>
-//     );
-// }

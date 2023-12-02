@@ -317,10 +317,22 @@ body {
   line-height: 1.2; /* Adjust the line height for form groups */
 }
 .mark-button {
-  background-color: #c4779d;
+  background-color: #c82682;
   border-radius: 15px;
   color: white;
   padding: 8px 20px;
   font-size: 1.5rem;
   text-align: center;
+}
+
+.btn.mark-button:hover {
+  background-color: #c4779d; /* Set the desired background color for hover */
+  color: white;
+}
+.btn.mark-button:active {
+  background-color: #e3188b; /* Set a darker color or a different shade */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow during click */
+  padding: 7px 19px; /* Slightly reduce padding to simulate a click effect */
+  transform: scale(0.95); /* Slightly scale down during click */
+
 }

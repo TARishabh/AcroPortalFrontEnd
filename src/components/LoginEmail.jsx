@@ -2,16 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 
-
-// #TODO  BUTTONS DAALNE HAI 2 ->  MARK, ALL PRESENT  
-// #TODO  dark mode daalna hai
-// #TODO view attendance ka page banana hai
-// #TODO modal banana hai student ki display ke liye
-// #TODO profile page banana hai User ka
-
-
 const Login = (props) => {
-    const host = 'http://127.0.0.1:3000';
     const { SetAlert } = props;
     const context = useContext(UserContext);
     const { updatedMail } = context;  // Update this line
@@ -19,6 +10,8 @@ const Login = (props) => {
     const [secretkey, setSecretKey] = useState('');
     const [showSecretKey, setShowSecretKey] = useState(false);
     const navigate = useNavigate();
+    const host = import.meta.env.VITE_BACKEND_URL
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
         // Check if there are any numbers in the email address
@@ -35,7 +28,6 @@ const Login = (props) => {
             body: JSON.stringify({email:email}),
         });
         const res = await response.json();
-        {console.log(res)};
         if (res.results === true){
             updatedMail(email);
             navigate('/enterpassword');
@@ -43,8 +35,33 @@ const Login = (props) => {
         }
         else if (res.results === false){
             navigate('/register');
-            SetAlert('Please Register','success');
+            SetAlert('Please Register','primary');
         }
+        else {
+            if (Array.isArray(res)) {
+                // If it's an array, loop through it
+                res.forEach((element) => {
+                    let message;
+
+                    if (element.message) {
+                        message = element.message;
+                    } else if (element.errors) {
+                        message = element.errors;
+                    }
+                    SetAlert(message, 'danger');
+                });
+            } else {
+                // If it's not an array, handle individual case
+                let message;
+
+                if (res.message) {
+                    message = res.message;
+                } else if (res.errors) {
+                    message = res.errors;
+                }
+                SetAlert(message, 'danger');
+            };
+        };
     };
 
 
@@ -82,15 +99,3 @@ const Login = (props) => {
 };
 
 export default Login;
-
-
-
-                    {/* <strong><label for="password">Password:</label></strong>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Enter your password"
-                        className="rounded-input my-2"
-                    /> */}
