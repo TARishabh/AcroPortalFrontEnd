@@ -10,6 +10,7 @@ import Register from './components/Register';
 import UserState from './context/UserState';
 import Home from './components/Home';
 import MarkAttendance from './components/MarkAttendance';
+import ViewAttendance from './components/ViewAttendance';
 
 
 function App() {
@@ -22,19 +23,20 @@ function App() {
 
     setTimeout(() => {
       updatedAlert(null);
-    }, 1000);
+    }, 1700);
   }
 
   return (
     <UserState>
       <Router>
-        {/* <Alert alert={alert}></Alert> */}
+        <Alert alert={alert}></Alert>
         <Routes>
-          <Route exact path="/" element={<Home SetAlert={SetAlert} />} />
+        <Route exact path="/" element={<LoginEmail SetAlert={SetAlert} />} />
           <Route exact path="/login" element={<LoginEmail SetAlert={SetAlert} />} />
           <Route exact path="/register" element={<Register SetAlert={SetAlert} />} />
           <Route exact path="/enterpassword" element={<EnterPassword SetAlert={SetAlert} />} />
           <Route exact path="/markattendance" element={<MarkAttendance SetAlert={SetAlert} />} />
+          <Route exact path="/viewattendance" element={<ViewAttendance SetAlert={SetAlert} />} />
         </Routes>
       </Router>
     </UserState>

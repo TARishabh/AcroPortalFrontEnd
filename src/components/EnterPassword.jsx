@@ -2,11 +2,13 @@ import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 
-export default function EnterPassword() {
-    const host = 'http://127.0.0.1:3000';
+export default function EnterPassword(props) {
+    const { SetAlert } = props;
+    const host = import.meta.env.VITE_BACKEND_URL
     const [password, setPassword] = useState('');
     const context = useContext(UserContext);
-    const { email,updateToken } = context;
+    const { email,updateToken,updateUserType } = context;
+    const navigate = useNavigate();
 
     const handleOnSubmit = async(e) =>{
         e.preventDefault();
@@ -18,28 +20,35 @@ export default function EnterPassword() {
             body: JSON.stringify({email:email,password:password}),
         });
         const res = await response.json();
-        console.log(res);
         if (res.results ){
-            localStorage.setItem('token',res.results)
+            localStorage.setItem('Authorization',res.results);
             updateToken(res.results);
+            updateUserType(res.user_type);
             SetAlert(res.message,'success');
             if (res.user_type === 'Student'){
-                navigate('/home');
+                navigate('/viewattendance');
+                SetAlert('success','success');
             }
             else if (res.user_type === 'Faculty'){
                 navigate('/markattendance');
+                SetAlert('success','success');
             }
         }
         else{
             SetAlert('Invalid Credentials', 'danger');
-        }
+        };
     }
 
     return (
         <div className="login-container">
-            <div className="pink-background"></div>
+            <div className="pink-background">
+                <h1 className='attendance-text'><strong>ATTENDANCE</strong></h1>
+                <h1 className='made-text'><strong>MADE</strong></h1>
+                <h1 className='simple-text'><strong>SIMPLE.</strong></h1>
+            </div>
             <div className="login-form">
-                <h1 style={{ marginBottom: '50px' }}>Login</h1>
+            <h1 className='welcome-text'>WELCOME TO ACROPORTAL</h1>
+                <h1 className='login-text' style={{ marginBottom: '50px' }}>Login</h1>
                 <form>
                         <div>
                             <strong><label htmlFor="password">Password:</label></strong>

@@ -1,7 +1,3 @@
-/* body {
-  overflow: hidden;
-  height: 100vh;
-} */
 
 .login-container {
   display: flex;
@@ -13,18 +9,8 @@
   flex: 2; /* Adjusted to 40% */
   background-color: #c4779d;
   height: 100vh;
+  color: white;
 }
-
-@media (min-width: 0px) and (max-width:480px){
-  .pink-background {
-    flex: 2; /* Adjusted to 40% */
-    background-color: black;
-    /* height: 100vh; */
-    height: 100%;
-  }
-}
-
-
 .login-form {
   flex: 3; /* Adjusted to 60% */
   display: flex;
@@ -35,13 +21,31 @@
   padding: 20px;
   border-radius: 10px;
 }
-
 .rounded-input {
   width: 125%;
   padding: 10px;
-  border: 1px solid #E7E7E9; /* Set the default border color and width */
+  border: 1.5px solid rgb(206, 89, 206);
   border-radius: 50px;
   margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .pink-background {
+    display: none;
+  }
+
+  .login-form {
+    flex: 1; /* Adjusted to 100% */
+    border-radius: 0; /* Remove border radius for full width */
+  }
+
+  .rounded-input {
+    width: 100%; /* Set input width to 100% on smaller screens */
+  }
+  .welcome-text {
+    position: static; /* Change to static for smaller screens */
+    margin-top: 20px; /* Add margin for spacing on smaller screens */
+  }
 }
 .continue-button {
   width: 50%;
@@ -58,7 +62,7 @@
   margin-left: auto; /* Set left margin to auto */
   margin-right: auto; /* Set right margin to auto */
 }
-/* Add these styles in your CSS file or style tag */
+
 .mark-attendance-container {
   padding: 20px;
 }
@@ -129,4 +133,206 @@ select {
 
 .custom-margin-user-container{
   margin-top: 3%;
+}
+
+/* @media (min-width: 319px) and (max-width:480px){
+  body {
+  background-color: lightsalmon;
+}
+} */
+
+.attendance-text{
+  font-size: 5rem;
+  margin-left:5rem;
+  margin-top: 10rem;
+  font-weight: auto;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.made-text{
+  font-size: 5rem;
+  margin-left:12rem;
+  margin-top: 9rem;
+  font-weight: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.simple-text{
+  font-size: 5rem;
+  margin-left:10rem;
+  margin-top: 10rem;
+  font-weight: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.welcome-text{
+  position: absolute;
+  top: 10%;
+  font-weight: bolder;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.welcome-text-create{
+  position: absolute;
+  top: 4%;
+  font-weight: bolder;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.create-acctount-text{
+  margin-bottom: 30px;
+  font: bold 24px/29px "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.login-text{
+  font: bold 24px/29px "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+label.email-text{
+  font-family:"Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bolder;
+}
+
+
+
+.mark-attendance-container {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  /* border: 1px solid #ccc; */
+  border-radius: 8px;
+  background-color: #fff;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.mark-attendance-heading {
+  background-color: #c4779d;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.mark-attendance-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.input-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.select-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.student-card {
+  width: 8rem;
+  margin: 0.5rem;
+}
+
+.card-button {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: #D9D9D9;
+}
+
+.card-button:hover {
+  background-color: #c4779d;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.card-title {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .mark-attendance-form {
+    flex-direction: row; /* Change to row for larger screens */
+    align-items: center; /* Center items horizontally */
+    justify-content: center;
+  }
+  /* .container.custom-margin-user-container .row {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  } */
+  .form-group {
+    flex-grow: 2; /* Make both fields grow equally */
+    margin-right: 10px; /* Adjust spacing between fields */
+  }
+
+  .input-field,
+  .select-field {
+    width: 100%; /* Set width to 100% for larger screens */
+    border: 1px solid #e1c0d1;
+  }
+  .mark-all-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 32%;
+    font-family: 'Arial', sans-serif; 
+    font-size: 16px
+  }
+
+  .form-check-label {
+    margin-left: 100px;
+  }
+}
+body {
+  font-family: 'Arial', sans-serif; 
+  font-size: 16px;
+  color: #333; /* Set the default text color */
+  line-height: 1.4; /* Adjust line height for better readability */
+}
+.form-group {
+  margin-bottom: 20px;
+  line-height: 1.2; /* Adjust the line height for form groups */
+}
+.mark-button {
+  background-color: #c82682;
+  border-radius: 15px;
+  color: white;
+  padding: 8px 20px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.btn.mark-button:hover {
+  background-color: #c4779d; /* Set the desired background color for hover */
+  color: white;
+}
+.btn.mark-button:active {
+  background-color: #e3188b; /* Set a darker color or a different shade */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow during click */
+  padding: 7px 19px; /* Slightly reduce padding to simulate a click effect */
+  transform: scale(0.95); /* Slightly scale down during click */
+
 }
