@@ -60,6 +60,7 @@ export default function Register(props) {
         const res = await response.json();
         if (res.results) {
             navigate('/login')
+            SetAlert('Account Created Successfully','success')
         }
         else if (res.error){
             SetAlert(res.error,'danger')
