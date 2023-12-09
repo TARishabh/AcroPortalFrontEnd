@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
-import '../assets/fonts.css';
 
 const Login = (props) => {
     const { SetAlert } = props;
@@ -35,6 +34,7 @@ const Login = (props) => {
             SetAlert('Email Verified', 'success');
         }
         else if (res.results === false) {
+            updatedMail(email);
             navigate('/register');
             SetAlert('Please Register', 'primary');
         }
@@ -82,8 +82,8 @@ const Login = (props) => {
                         muted
                         src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
                     ></video>
-                    <a className="auth-sidebar-credit" href="https://dribbble.com/shots/21785427-Mushroom-world-for-XR">
-                        @glebich
+                    <a style={{display:"none"}} className="auth-sidebar-credit" href="https://dribbble.com/shots/21785427-Mushroom-world-for-XR">
+                        {/* @glebich */}
                     </a>
                 </div>
             </section>

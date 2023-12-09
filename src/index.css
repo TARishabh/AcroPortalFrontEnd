@@ -572,31 +572,6 @@ body.mona-sans {
   font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-@font-face {
-  font-family: "Mona Sans";
-  font-stretch: 75% 125%;
-  font-weight: 200 900;
-  src: url(/assets/mona-sans/Mona-Sans-f258701679eace96725e03121950af40ae6e4ceef03b21242c66a3b7ae6ccbf4.woff2)
-      format("woff2 supports variations"),
-    url(/assets/mona-sans/Mona-Sans-f258701679eace96725e03121950af40ae6e4ceef03b21242c66a3b7ae6ccbf4.woff2)
-      format("woff2-variations");
-}
-
-@font-face {
-  font-family: "WF Visual Sans";
-  font-style: normal;
-  font-weight: normal;
-  src: url(/assets/wf-visual-sans/WFVisualSans-RegularText-13fd044462a3575485ffb638e2ce62e9104e824450fd2acc2b637739fa3e1827.woff2);
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "WF Visual Sans";
-  font-style: normal;
-  font-weight: 600;
-  src: url(/assets/wf-visual-sans/WFVisualSans-SemiBold-03f3b12c3edbffd529235b0478ca9cf532b3e70ffbfa07e8fca971d762a7504b.woff2);
-  font-display: swap;
-}
 
 label {
   font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -1866,7 +1841,7 @@ input[type="checkbox"]:checked:after {
   position: absolute;
   width: 12px;
   height: 12px;
-  background-image: url(/assets/icons/check-white-e1db84f77c352f71d23da8a5193fe4ee7e141ac90615ad9f177e24b1c815248f.svg);
+  /* background-image: url(/assets/icons/check-white-e1db84f77c352f71d23da8a5193fe4ee7e141ac90615ad9f177e24b1c815248f.svg); */
   background-repeat: no-repeat;
 }
 
@@ -8856,7 +8831,7 @@ form .errorExplanation {
 
 fieldset.fieldWithErrors {
   background: #fff
-    url(/assets/icon-formerror-36bd19bd97f089245a3ddf3698b3f520cee04c0b2037dfd341b21a822d178677.png)
+    /* url(/assets/icon-formerror-36bd19bd97f089245a3ddf3698b3f520cee04c0b2037dfd341b21a822d178677.png) */
     no-repeat 4px 30%;
   background-size: 14px;
 }
