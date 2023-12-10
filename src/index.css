@@ -332,7 +332,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-top: 0;
-  /* background-color: pink; */
+  /* background-color: blue; */
 }
 
 /* Container for the label and input field */
@@ -442,7 +442,7 @@ label.email-text {
 }
 
 .mark-attendance-heading {
-  background-color: #c4779d;
+  background-color: #245ba8;
   color: #fff;
   padding: 15px;
   border-radius: 8px;
@@ -529,8 +529,7 @@ label.email-text {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    margin-left: 32%;
-    font-family: "Arial", sans-serif;
+    /* margin-left: 32%; */
     font-size: 16px;
   }
 
@@ -549,7 +548,7 @@ body {
   line-height: 1.2; /* Adjust the line height for form groups */
 }
 .mark-button {
-  background-color: #c82682;
+  background-color: #245ba8;
   border-radius: 15px;
   color: white;
   padding: 8px 20px;
@@ -558,14 +557,15 @@ body {
 }
 
 .btn.mark-button:hover {
-  background-color: #c4779d; /* Set the desired background color for hover */
+  background-color: #245ba8;
   color: white;
 }
+
 .btn.mark-button:active {
-  background-color: #e3188b; /* Set a darker color or a different shade */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow during click */
-  padding: 7px 19px; /* Slightly reduce padding to simulate a click effect */
-  transform: scale(0.95); /* Slightly scale down during click */
+  background-color: #245ba8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 7px 19px;
+  transform: scale(0.95);
 }
 
 body.mona-sans {
@@ -770,6 +770,7 @@ input:hover[type="password"],
 input:hover[type="email"],
 input:hover[type="url"],
 input:hover[type="tel"],
+input:hover[type="date"],
 .braintree-input:hover,
 .selectize-input:hover,
 textarea:hover,
@@ -1066,6 +1067,7 @@ select.input-with-outline-only,
 }
 
 .selectize-input input[type="text"],
+.selectize-input input[type="date"],
 .selectize-input input[type="number"],
 .selectize-input input[type="search"],
 .selectize-input input[type="password"],
@@ -1174,6 +1176,7 @@ input[type="number"] {
 }
 
 input[type="text"],
+input[type="date"],
 input[type="number"],
 input[type="search"],
 input[type="password"],
@@ -1832,8 +1835,9 @@ input[type="radio"] {
 
 input:checked[type="checkbox"],
 input:checked[type="radio"] {
-  border-color: #ea64d9;
-  background-color: #ea64d9;
+  /* border-color: #ea64d9; */
+  /* background-color: #ea64d9; */
+  background-color: #245ba8;
 }
 
 input[type="checkbox"]:checked:after {
@@ -9397,7 +9401,53 @@ main {
   border: 1px solid #245ba8; /* Set border color to transparent */
 }
 .btncustom:active {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow during click */
-  padding: 7px 19px; /* Slightly reduce padding to simulate a click effect */
-  transform: scale(0.95); /* Slightly scale down during click */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 7px 19px;
+  transform: scale(0.95);
 }
+
+.ifields{
+  height: auto;
+}
+
+@media (min-width: 576px) {
+  .mark-all-checkbox {
+      margin-left: auto;
+      margin-bottom: 14px;
+  }
+}
+
+@media (min-width: 600px) {
+  .form-check {
+      margin-left: 40%;
+  }
+  .custom-row-size {
+    font-size: 20px;
+    height: 60px;
+    padding: 10px;
+    border-radius: 5px;
+  }
+}
+
+.total-count{
+  font-size: 15px;
+}
+
+.student-cards-container {
+  background-color: #f0f0f0; 
+  padding: 10px;
+  margin-top: 20px; 
+  border-radius: 8px; 
+  overflow: hidden; 
+}
+
+.alert-container {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  width: 220px;
+  height: 50px;
+  z-index: 1000;
+  font-size: 15px;
+}
+

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
+import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
 
 const Login = (props) => {
     const { SetAlert } = props;
@@ -82,12 +83,12 @@ const Login = (props) => {
                         muted
                         src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
                     ></video>
-                    <a style={{display:"none"}} className="auth-sidebar-credit" href="https://dribbble.com/shots/21785427-Mushroom-world-for-XR">
+                    <a style={{display:"none"}} className="auth-sidebar-credit">
                         {/* @glebich */}
                     </a>
                 </div>
             </section>
-            <section className="content" data-content-container="">
+            <section className="content" data-content-container="" style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}>
                 <main>
                     <div className="auth-content">
                         <h2>Login to Acroportal</h2>
@@ -96,7 +97,6 @@ const Login = (props) => {
                             <div
                                 id="g_id_onload"
                                 data-client_id="32073492121-s6ur8ti01mh34gq2bpbufb8ujdfrpn4v.apps.googleusercontent.com"
-                                data-login_uri="https://dribbble.com/auth/google_one_tap/callback"
                                 data-ux_mode="redirect"
                             ></div>
                             <form className="auth-google-form" action="/auth/google" acceptCharset="UTF-8" method="post">

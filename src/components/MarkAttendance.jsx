@@ -15,11 +15,11 @@ export default function MarkAttendance(props) {
     const host = import.meta.env.VITE_BACKEND_URL
     const [selectAll, setSelectAll] = useState(false);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
-    const {userType} = context;
+    const { userType } = context;
     const navigate = useNavigate();
     const token = localStorage.getItem('Authorization');
     useEffect(() => {
-        if (userType === 'Student'){
+        if (userType === 'Student') {
             navigate('/viewattendance')
         }
         const fetchsubjects = async () => {
@@ -171,13 +171,12 @@ export default function MarkAttendance(props) {
             <h2 className="mark-attendance-heading"><strong>MARK ATTENDANCE</strong></h2>
             <form className="mark-attendance-form">
                 <div className="d-flex">
-                    {/* Subject Field */}
                     <div className="form-group flex-grow-1">
                         <label className="label my-2" htmlFor="subject">
                             Select Subject:
                         </label>
                         <select
-                            className="select-field"
+                            className="form-control ifields"
                             id="subject"
                             name="subject"
                             value={selectedSubject}
@@ -196,12 +195,12 @@ export default function MarkAttendance(props) {
                     </div>
 
                     {/* Date Field */}
-                    <div className="form-group flex-grow-1">
+                    <div className="form-group flex-grow-1 mx-2">
                         <label className="label my-2" htmlFor="date">
                             Select Date:
                         </label>
                         <input
-                            className="input-field"
+                            className="form-control ifields"
                             type="date"
                             id="date"
                             name="date"
@@ -211,23 +210,21 @@ export default function MarkAttendance(props) {
                     </div>
                 </div>
             </form>
-            <div className='d-flex'>
-                <div className="mark-all-checkbox my-1">
-                    <input
-                        style={{ border: '2px solid' }}
-                        type="checkbox"
-                        className="form-check-input"
-                        id="selectAllCheckbox"
-                        checked={selectAll}
-                        onChange={handleSelectAllChange}
-                    />
-                    <label className="form-check-label mx-3 " htmlFor="selectAllCheckbox">
-                        <strong>Mark All Present</strong>
-                    </label>
-                </div>
+            <div className="form-check">
+                <input
+                    style={{ border: '2px solid' }}
+                    type="checkbox"
+                    className="form-check-input"
+                    id="selectAllCheckbox"
+                    checked={selectAll}
+                    onChange={handleSelectAllChange}
+                />
+                <label className="form-check-label mx-3" htmlFor="selectAllCheckbox">
+                    <strong>Mark All Present</strong>
+                </label>
             </div>
 
-            <div className="container custom-margin-user-container d-flex flex-wrap">
+            <div className="container custom-margin-user-container d-flex flex-wrap student-cards-container">
                 {showStudents &&
                     users
                         .sort((a, b) => parseInt(a.enrollment_number.slice(10, 12)) - parseInt(b.enrollment_number.slice(11, 13)))
@@ -237,8 +234,8 @@ export default function MarkAttendance(props) {
                                     type="button"
                                     className="btn card-button"
                                     onClick={() => onclickUser(user._id)}
-                                    onDoubleClick={()=> onDoubleClickUser(user._id)}
-                                    style={{color: checkIfUserSelected(user._id) ? 'white' : 'black', backgroundColor: checkIfUserSelected(user._id) ? '#c4779d' : '#D9D9D9', padding: 0, border: 'none' }}
+                                    onDoubleClick={() => onDoubleClickUser(user._id)}
+                                    style={{ color: checkIfUserSelected(user._id) ? 'white' : 'black', backgroundColor: checkIfUserSelected(user._id) ? '#245ba8' : '#D9D9D9', padding: 0, border: 'none' }}
                                 >
                                     <div className="card-body">
                                         <h5 className="card-title">{user.enrollment_number.slice(10, 12)}</h5>
@@ -254,16 +251,16 @@ export default function MarkAttendance(props) {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 style={{fontWeight:'bold'}} className="modal-title" id="userDetailsModalLabel">User Details</h5>
+                            <h5 style={{ fontWeight: 'bold' }} className="modal-title" id="userDetailsModalLabel">User Details</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
                             {/* Display user details here */}
                             {selectedUserDetails && (
                                 <div>
-                                    <p><span style={{fontWeight:'bold'}}>Name: </span> <strong>{`${selectedUserDetails.first_name} ${selectedUserDetails.last_name}`}</strong></p>
-                                    <p><span style={{fontWeight:'bold'}}>Email:</span> <strong>{selectedUserDetails.email}</strong></p>
-                                    <p><span style={{fontWeight:'bold'}}>Enrollment Number:</span> <strong>{selectedUserDetails.enrollment_number}</strong></p>
+                                    <p><span style={{ fontWeight: 'bold' }}>Name: </span> <strong>{`${selectedUserDetails.first_name} ${selectedUserDetails.last_name}`}</strong></p>
+                                    <p><span style={{ fontWeight: 'bold' }}>Email:</span> <strong>{selectedUserDetails.email}</strong></p>
+                                    <p><span style={{ fontWeight: 'bold' }}>Enrollment Number:</span> <strong>{selectedUserDetails.enrollment_number}</strong></p>
                                 </div>
                             )}
                         </div>

@@ -63,8 +63,15 @@ export default function Register(props) {
         });
         const res = await response.json();
         if (res.results) {
-            // navigate('/login')
-            console.log(results);
+            localStorage.setItem('Authorization',res.results.token);
+            userContext.updateToken(res.results.token);
+            userContext.updateUserType(res.results.user_type);
+            if (res.results.user_type === 'Student'){
+                navigate('/viewattendance');
+            }
+            else if (res.results.user_type === 'Faculty'){
+                navigate('/markattendance');
+            }
             SetAlert('Account Created Successfully','success')
         }
         else if (res.error){
@@ -111,11 +118,11 @@ export default function Register(props) {
                         loop
                         muted
                         type='video/mp4'
-                        // src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
-                        src='../assets/a_video_of_stars_galaxy_seed6246393802789651653.mp4'
+                        src='../assets/istockphoto-813115280-640-adpp-is_rsPnJnen.mp4'
                     ></video>
+                    {/* <video data-testid="video-asset" src='../assets/istockphoto-813115280-640-adpp-is_rsPnJnen.mp4' autoPlay loop muted></video> */}
 
-                    <a style={{display:"none"}} className="auth-sidebar-credit" href="https://dribbble.com/shots/21785427-Mushroom-world-for-XR">
+                    <a style={{display:"none"}} className="auth-sidebar-credit">
                         {/* @glebich */}
                     </a>
                 </div>
@@ -169,7 +176,7 @@ export default function Register(props) {
                         name='rconfirmpassword'
                         onChange={(e) => setconfirmPassword(e.target.value)}
                     />
-                    <label htmlFor="firstname">First Name:</label>
+                    <label htmlFor="firstname">First Name</label>
                     <input
                         type="text"
                         id="firstname"

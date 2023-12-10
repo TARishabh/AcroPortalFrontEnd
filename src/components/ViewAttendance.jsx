@@ -86,7 +86,7 @@ export default function ViewAttendance(props) {
                         Select Subject:
                     </label>
                     <select
-                        className="select-field"
+                        className="form-control ifields"
                         id="subject"
                         name="subject"
                         value={selectedSubject}
@@ -110,7 +110,7 @@ export default function ViewAttendance(props) {
                         Select Date:
                     </label>
                     <input
-                        className="input-field"
+                        className="form-control ifields"
                         type="date"
                         id="date"
                         name="date"
@@ -121,8 +121,8 @@ export default function ViewAttendance(props) {
             </div>
         </form>
         <div className='d-flex'>
-                <div className="mark-all-checkbox my-1">
-                    <strong>TOTAL ATTENDANCE COUNT : {attendanceResults.length}</strong>
+                <div className="form-check-label form-check my-1">
+                    <strong className='total-count'>TOTAL ATTENDANCE COUNT : {attendanceResults.length}</strong>
                 </div>
             </div>
 
@@ -130,8 +130,8 @@ export default function ViewAttendance(props) {
                 {attendanceResults.map((attendance, index) => (
                     <div
                         key={attendance._id}
-                        className={`row mb-3`}
-                        style={{ padding: '10px', borderRadius: '5px', backgroundColor: `${index % 2 === 0 ? '#c4779d' : '#d9d9d9'}`, color: `${index % 2 === 0 ? 'white' : 'black'}` }}
+                        className={`row mb-3 custom-row-size`}
+                        style={{backgroundColor: `${index % 2 === 0 ? '#245ba8' : '#d9d9d9'}`, color: `${index % 2 === 0 ? 'white' : 'black'}` }}
                     >
                         <div className="col">
                             <strong>{subjects.find(sub => sub._id === attendance.subject_id)?.name}</strong>

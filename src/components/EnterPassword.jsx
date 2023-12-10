@@ -1,6 +1,8 @@
 import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
+import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
+
 
 export default function EnterPassword(props) {
     const { SetAlert } = props;
@@ -62,7 +64,7 @@ export default function EnterPassword(props) {
                     </a>
                 </div>
             </section>
-            <section className="content" data-content-container="">
+            <section className="content" data-content-container="" style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}>
                 <main>
                     <div className="auth-content">
                         <h2>Login to Acroportal</h2>
