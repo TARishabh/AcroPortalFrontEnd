@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Register(props) {
@@ -37,9 +39,10 @@ export default function Register(props) {
     const handleCheckState = async (e) => {
         e.preventDefault();
 
-        if (password !== confirmpassword){
-            SetAlert("Password Fields Doesn't Match",'danger');
-        }
+        // if (password !== confirmpassword){
+        //     // SetAlert("Password Fields Doesn't Match",'danger');
+        //     toast.error("Password Fields Doesn't Match",{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+        // }
         // You can add additional validation logic here before making the fetch call
         let data = {
             email: email,
@@ -72,10 +75,13 @@ export default function Register(props) {
             else if (res.results.user_type === 'Faculty'){
                 navigate('/markattendance');
             }
-            SetAlert('Account Created Successfully','success')
+            // SetAlert('Account Created Successfully','success')
+            toast.success("Account Created Successfully",{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+            
         }
         else if (res.error){
-            SetAlert(res.error,'danger')
+            // SetAlert(res.error,'danger')
+            toast.error(res.error,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
         }
         else {
             if (Array.isArray(res)) {
@@ -88,7 +94,8 @@ export default function Register(props) {
                     } else if (element.errors) {
                         message = element.errors;
                     }
-                    SetAlert(message, 'danger');
+                    // SetAlert(message, 'danger');
+                    toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
                 });
             } else {
                 // If it's not an array, handle individual case
@@ -99,7 +106,8 @@ export default function Register(props) {
                 } else if (res.errors) {
                     message = res.errors;
                 }
-                SetAlert(message, 'danger');
+                // SetAlert(message, 'danger');
+                toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
             };
         };
     }
@@ -118,7 +126,8 @@ export default function Register(props) {
                         loop
                         muted
                         type='video/mp4'
-                        src='../assets/istockphoto-813115280-640-adpp-is_rsPnJnen.mp4'
+                        src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
+                        // src='../assets/a_video_of_stars_galaxy_seed6246393802789651653.mp4'
                     ></video>
                     {/* <video data-testid="video-asset" src='../assets/istockphoto-813115280-640-adpp-is_rsPnJnen.mp4' autoPlay loop muted></video> */}
 
@@ -155,6 +164,7 @@ export default function Register(props) {
                         onChange={handleEmailChange}
                         placeholder="Enter your email"
                         className="rounded-input my-2"
+                        style={{fontWeight:'bold'}}
                     />
                     <label htmlFor="password">Password</label>
                     <input
@@ -165,6 +175,7 @@ export default function Register(props) {
                         id='rpassword'
                         name='rpassword'
                         onChange={(e) => setPassword(e.target.value)}
+                        style={{fontWeight:'bold'}}
                     />
                     <label htmlFor="confirmpassword">Confirm Password</label>
                     <input
@@ -175,6 +186,7 @@ export default function Register(props) {
                         id='rconfirmpassword'
                         name='rconfirmpassword'
                         onChange={(e) => setconfirmPassword(e.target.value)}
+                        style={{fontWeight:'bold'}}
                     />
                     <label htmlFor="firstname">First Name</label>
                     <input
@@ -185,6 +197,7 @@ export default function Register(props) {
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder="Enter First Name"
                         className="rounded-input my-2"
+                        style={{fontWeight:'bold'}}
                     />
                     <label htmlFor="lastname">Last Name</label>
                     <input
@@ -195,6 +208,7 @@ export default function Register(props) {
                         onChange={(e) => setLastName(e.target.value)}
                         placeholder="Enter Last Name"
                         className="rounded-input my-2"
+                        style={{fontWeight:'bold'}}
                     />
                     {showSecretKey === true ? (
                         <>
@@ -207,6 +221,7 @@ export default function Register(props) {
                     id='secretkey'
                     name='secretkey'
                     onChange={(e) => setSecretKey(e.target.value)}
+                    style={{fontWeight:'bold'}}
                 />
                 </>
                     ):(<>
@@ -219,6 +234,7 @@ export default function Register(props) {
                             onChange={(e) => setEnrollmentNumber(e.target.value)}
                             placeholder="Enter Enrollment Number"
                             className="rounded-input my-2"
+                            style={{fontWeight:'bold'}}
                         />
                     </>)}
                             </form>

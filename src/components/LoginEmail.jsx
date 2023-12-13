@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
-import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
+// import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = (props) => {
     const { SetAlert } = props;
@@ -12,6 +14,8 @@ const Login = (props) => {
     const [showSecretKey, setShowSecretKey] = useState(false);
     const navigate = useNavigate();
     const host = import.meta.env.VITE_BACKEND_URL
+
+    const notify = () => toast("Wow so easy!");
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -32,12 +36,14 @@ const Login = (props) => {
         if (res.results === true) {
             updatedMail(email);
             navigate('/enterpassword');
-            SetAlert('Email Verified', 'success');
+            // SetAlert('Email Verified', 'success');
+            toast.success('Email Verified',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
         }
         else if (res.results === false) {
             updatedMail(email);
             navigate('/register');
-            SetAlert('Please Register', 'primary');
+            // SetAlert('Please Register', 'primary');
+            toast.info('Please Register',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
         }
         else {
             if (Array.isArray(res)) {
@@ -50,7 +56,8 @@ const Login = (props) => {
                     } else if (element.errors) {
                         message = element.errors;
                     }
-                    SetAlert(message, 'danger');
+                    // SetAlert(message, 'danger');
+                    toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
                 });
             } else {
                 // If it's not an array, handle individual case
@@ -61,7 +68,8 @@ const Login = (props) => {
                 } else if (res.errors) {
                     message = res.errors;
                 }
-                SetAlert(message, 'danger');
+                // SetAlert(message, 'danger');
+                toast.error(message,{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
             };
         };
     };
@@ -88,7 +96,9 @@ const Login = (props) => {
                     </a>
                 </div>
             </section>
-            <section className="content" data-content-container="" style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}>
+
+            {/* <section className="content" data-content-container="" style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}> */}
+            <section className="content bg-image">
                 <main>
                     <div className="auth-content">
                         <h2>Login to Acroportal</h2>
@@ -115,10 +125,11 @@ const Login = (props) => {
                                     onChange={handleEmailChange}
                                     placeholder="Enter your email"
                                     className="rounded-input my-2"
+                                    style={{fontWeight:'bold'}}
                                 />
                             </form>
-                            <button onClick={handleOnSubmit} className='btn2 btn2--large btn2--full-width margin-t-20 btncustom' type="submit"><strong>Continue</strong></button>
-
+                            <button onClick={handleOnSubmit} className='btn2 btn2--large btn2--full-width margin-t-20 btncustom' type="submit"><strong>Continue</strong>
+                            </button>
                         </div>
                     </div>
                 </main>

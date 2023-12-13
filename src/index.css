@@ -260,6 +260,7 @@ hr {
   border: 1.5px solid rgb(206, 89, 206);
   border-radius: 50px;
   margin-bottom: 10px;
+  font-weight: 500px;
 }
 
 @media (max-width: 767px) {
@@ -9451,3 +9452,11 @@ main {
   font-size: 15px;
 }
 
+@media (min-width: 960px) {
+  .bg-image {
+    display: block;
+    background: url('./assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}

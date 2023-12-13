@@ -2,7 +2,8 @@ import React,{useState,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function EnterPassword(props) {
     const { SetAlert } = props;
@@ -26,18 +27,22 @@ export default function EnterPassword(props) {
             localStorage.setItem('Authorization',res.results);
             updateToken(res.results);
             updateUserType(res.user_type);
-            SetAlert(res.message,'success');
+            // SetAlert(res.message,'success');
+            toast.success(res.message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
             if (res.user_type === 'Student'){
                 navigate('/viewattendance');
-                SetAlert('success','success');
+                // SetAlert('success','success');
+                toast.success('success',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
             }
             else if (res.user_type === 'Faculty'){
                 navigate('/markattendance');
-                SetAlert('success','success');
+                // SetAlert('success','success');
+                toast.success('success',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
             }
         }
         else{
-            SetAlert('Invalid Credentials', 'danger');
+            // SetAlert('Invalid Credentials', 'danger');
+            toast.error('Invalid Credentials',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
         };
     }
 
@@ -55,8 +60,8 @@ export default function EnterPassword(props) {
                         loop
                         muted
                         type='video/mp4'
-                        // src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
-                        src='../assets/a_video_of_stars_galaxy_seed6246393802789651653.mp4'
+                        src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
+                        // src='../assets/a_video_of_stars_galaxy_seed6246393802789651653.mp4'
                     ></video>
 
                     <a style={{display:"none"}} className="auth-sidebar-credit" href="https://dribbble.com/shots/21785427-Mushroom-world-for-XR">
@@ -64,7 +69,7 @@ export default function EnterPassword(props) {
                     </a>
                 </div>
             </section>
-            <section className="content" data-content-container="" style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center' }}>
+            <section className="content bg-image">
                 <main>
                     <div className="auth-content">
                         <h2>Login to Acroportal</h2>
@@ -92,6 +97,7 @@ export default function EnterPassword(props) {
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="Enter your Password"
                                     className="rounded-input my-2"
+                                    style={{fontWeight:'bold'}}
                                 />
                             </form>
                             <button onClick={handleOnSubmit} className='btn2 btn2--large btn2--full-width margin-t-20 btncustom' type="submit"><strong>Login</strong></button>

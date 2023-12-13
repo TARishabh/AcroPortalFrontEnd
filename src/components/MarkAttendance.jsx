@@ -1,6 +1,8 @@
 import React, { useEffect, useContext, useState, useRef } from 'react'
 import UserContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function MarkAttendance(props) {
     const { SetAlert } = props;
@@ -120,10 +122,12 @@ export default function MarkAttendance(props) {
             // navigate('/login')
         }
         else if (res.error) {
-            SetAlert(res.error, 'danger')
+            // SetAlert(res.error, 'danger')
+            toast.error(res.error,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
         }
         else if (res.message) {
-            SetAlert(res.message, 'success')
+            // SetAlert(res.message, 'success')
+            toast.success(res.message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
         }
         else {
             if (Array.isArray(res)) {
@@ -136,7 +140,9 @@ export default function MarkAttendance(props) {
                     } else if (element.errors) {
                         message = element.errors;
                     }
-                    SetAlert(message, 'danger');
+                    // SetAlert(message, 'danger');
+                    toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+
                 });
             } else {
                 // If it's not an array, handle individual case
@@ -147,7 +153,8 @@ export default function MarkAttendance(props) {
                 } else if (res.errors) {
                     message = res.errors;
                 }
-                SetAlert(message, 'danger');
+                // SetAlert(message, 'danger');
+                toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
             };
         };
     }
