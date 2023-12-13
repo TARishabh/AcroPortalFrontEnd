@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginEmail from './components/LoginEmail';
 import Alert from './components/Alert';
@@ -30,6 +31,7 @@ function App() {
     <UserState>
       <Router>
         <Alert alert={alert}></Alert>
+        <ToastContainer limit={3} />
         <Routes>
         <Route exact path="/" element={<LoginEmail SetAlert={SetAlert} />} />
           <Route exact path="/login" element={<LoginEmail SetAlert={SetAlert} />} />

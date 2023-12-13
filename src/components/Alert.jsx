@@ -4,8 +4,7 @@ export default function Alert(props) {
     return (
         props.alert && (
             <div
-                className={`alert alert-${props.alert.type} alert-dismissible fade show role=alert`}
-                style={{ position: 'fixed', top: '40px', right: '40px', width: '200px', zIndex: 1000 }}
+                className={`alert alert-${props.alert.type} alert-dismissible fade show role=alert alert-container`}
             >
                 {props.alert.message}
                 <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
