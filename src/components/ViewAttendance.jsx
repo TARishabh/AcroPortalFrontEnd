@@ -80,7 +80,6 @@ export default function ViewAttendance(props) {
         <h2 className="mark-attendance-heading"><strong>VIEW ATTENDANCE</strong></h2>
         <form className="mark-attendance-form">
             <div className="d-flex">
-                {/* Subject Field */}
                 <div className="form-group flex-grow-1">
                     <label className="label my-2" htmlFor="subject">
                         Select Subject:
@@ -105,7 +104,7 @@ export default function ViewAttendance(props) {
                 </div>
 
                 {/* Date Field */}
-                <div className="form-group flex-grow-1">
+                <div className="form-group flex-grow-1 mx-2">
                     <label className="label my-2" htmlFor="date">
                         Select Date:
                     </label>
