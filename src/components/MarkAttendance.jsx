@@ -16,6 +16,7 @@ export default function MarkAttendance(props) {
     const [showStudents, setShowStudents] = useState(true);
     const context = useContext(UserContext);
     const [loading, setLoading] = useState(true); // Add loading state
+    const [buttonLoader, setButtonLoader] = useState(false); // Add loading state
     const now = new Date();
     const host = import.meta.env.VITE_BACKEND_URL
     const [selectAll, setSelectAll] = useState(false);
@@ -60,6 +61,14 @@ export default function MarkAttendance(props) {
         fetchData();
     }, [context,token]);
 
+    const buttonStyle = {
+        backgroundColor: '#245ba8',
+        borderRadius: '15px',
+        color: 'white',
+        padding: '8px 20px',
+        fontSize: '1.5rem',
+        textAlign: 'center',
+    };
 
     const onclickUser = (currentUser) => {
         if (checkIfUserSelected(currentUser)) {
@@ -106,67 +115,75 @@ export default function MarkAttendance(props) {
 
 
     const markAttendanceOfStudents = async () => {
-        const formattedDateReturned = formatDate(selectedDate);
-        if (formattedTime[0] === '2' && formattedTime[1] === '4') {
-            formattedTime = '00:00'
-        };
-        const data = {
-            student_id: selectedStudents,
-            subject_id: selectedSubject,
-            date: formattedDateReturned,
-            time: formattedTime,
-            section: "DS",
-            year: 'III',
-        }
-        const response = await fetch(`${host}/attendance/markattendance`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token
-            },
-            body: JSON.stringify(data),
-        });
-        const res = await response.json();
-        if (res.results) {
-            // navigate('/login')
-        }
-        else if (res.error) {
-            // SetAlert(res.error, 'danger')
-            toast.error(res.error,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
-        }
-        else if (res.message) {
-            // SetAlert(res.message, 'success')
-            console.log(res.message);
-            toast.success(res.message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
-        }
-        else {
-            if (Array.isArray(res)) {
-                // If it's an array, loop through it
-                res.forEach((element) => {
+        setButtonLoader(true);
+        try {
+            const formattedDateReturned = formatDate(selectedDate);
+            if (formattedTime[0] === '2' && formattedTime[1] === '4') {
+                formattedTime = '00:00'
+            };
+            const data = {
+                student_id: selectedStudents,
+                subject_id: selectedSubject,
+                date: formattedDateReturned,
+                time: formattedTime,
+                section: "DS",
+                year: 'III',
+            }
+            const response = await fetch(`${host}/attendance/markattendance`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token
+                },
+                body: JSON.stringify(data),
+            });
+            const res = await response.json();
+            if (res.results) {
+                // navigate('/login')
+            }
+            else if (res.error) {
+                // SetAlert(res.error, 'danger')
+                toast.error(res.error,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+            }
+            else if (res.message) {
+                // SetAlert(res.message, 'success')
+                console.log(res.message);
+                toast.success(res.message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+            }
+            else {
+                if (Array.isArray(res)) {
+                    // If it's an array, loop through it
+                    res.forEach((element) => {
+                        let message;
+    
+                        if (element.message) {
+                            message = element.message;
+                        } else if (element.errors) {
+                            message = element.errors;
+                        }
+                        // SetAlert(message, 'danger');
+                        toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+    
+                    });
+                } else {
+                    // If it's not an array, handle individual case
                     let message;
-
-                    if (element.message) {
-                        message = element.message;
-                    } else if (element.errors) {
-                        message = element.errors;
+    
+                    if (res.message) {
+                        message = res.message;
+                    } else if (res.errors) {
+                        message = res.errors;
                     }
                     // SetAlert(message, 'danger');
                     toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
-
-                });
-            } else {
-                // If it's not an array, handle individual case
-                let message;
-
-                if (res.message) {
-                    message = res.message;
-                } else if (res.errors) {
-                    message = res.errors;
-                }
-                // SetAlert(message, 'danger');
-                toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
+                };
             };
-        };
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            toast.error('Error fetching data:',{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
+        } finally {
+            setButtonLoader(false);
+        }
     }
 
 
@@ -270,7 +287,11 @@ export default function MarkAttendance(props) {
                         ))}
             </div>
             <div className="d-flex justify-content-center">
-                <button onClick={markAttendanceOfStudents} type="button" className="btn mark-button mt-4">Mark</button>
+                <button style={buttonStyle} disabled={buttonLoader} onClick={markAttendanceOfStudents} type="submit" className="btn mark-button mt-4">
+                    {buttonLoader ? (<ClipLoader color={'#4285f4'} loading={true} size={35} />):(
+                        <strong>Mark</strong>
+                    )}
+                </button>
             </div>
             <div className="modal fade" id="userDetailsModal" tabIndex="-1" aria-labelledby="userDetailsModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
