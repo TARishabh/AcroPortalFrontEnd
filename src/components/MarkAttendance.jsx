@@ -49,11 +49,11 @@ export default function MarkAttendance(props) {
                 });
                 const res_api = await fetchUsers.json();
                 setUsers(res_api.results);
-                setLoading(false);
                 
             } catch (error) {
                 console.error('Error fetching data:', error);
                 toast.error('Error fetching data:',{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
+            } finally {
                 setLoading(false);
             }
         }
