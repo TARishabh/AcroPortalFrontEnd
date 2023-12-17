@@ -40,13 +40,13 @@ export default function ViewAttendance(props) {
                 const resAttendances = await responseAttendances.json();
                 setAttendanceResults(resAttendances.results);
 
-                setLoading(false); // Set loading to false when data is fetched
             } catch (error) {
                 console.error('Error fetching data:', error);
                 // Handle error if needed
-                setLoading(false); // Set loading to false even if there's an error
                 // SetAlert('', 'error');
                 toast.error('Error fetching data. Please try again later.',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
+            } finally {
+                setLoading(false);
             }
         };
 
