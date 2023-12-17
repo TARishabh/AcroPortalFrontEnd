@@ -2529,11 +2529,11 @@ div.work-opportunities div.email-or-cta a.delete-account {
   display: none;
 }
 
-form.dribbble-rsvp-true .rsvp-elsewhere-only {
+form.acroportal-rsvp-true .rsvp-elsewhere-only {
   display: none;
 }
 
-form.dribbble-rsvp-false .rsvp-dribbble-only {
+form.acroportal-rsvp-false .rsvp-acroportal-only {
   display: none;
 }
 
@@ -3192,16 +3192,16 @@ a.form-gradient.text-btn-dark:hover {
   color: #6e6d7a;
 }
 
-.form-sub.loading svg.dribbble-loader,
-.form-btn.loading svg.dribbble-loader,
-.form-blurple.loading svg.dribbble-loader,
-.form-forest.loading svg.dribbble-loader,
-.form-gradient.loading svg.dribbble-loader,
-a.form-sub.loading svg.dribbble-loader,
-a.form-btn.loading svg.dribbble-loader,
-a.form-blurple.loading svg.dribbble-loader,
-a.form-forest.loading svg.dribbble-loader,
-a.form-gradient.loading svg.dribbble-loader {
+.form-sub.loading svg.acroportal-loader,
+.form-btn.loading svg.acroportal-loader,
+.form-blurple.loading svg.acroportal-loader,
+.form-forest.loading svg.acroportal-loader,
+.form-gradient.loading svg.acroportal-loader,
+a.form-sub.loading svg.acroportal-loader,
+a.form-btn.loading svg.acroportal-loader,
+a.form-blurple.loading svg.acroportal-loader,
+a.form-forest.loading svg.acroportal-loader,
+a.form-gradient.loading svg.acroportal-loader {
   fill: none;
 }
 
@@ -3358,7 +3358,7 @@ a.form-gradient.star-btn:before {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  background: url(/assets/icons/dribbble-one-five/star-c8c96060df21974480b2cd936160a5bae964f991a4245ef146da1c67ca07cc32.svg)
+  background: url(/assets/icons/acroportal-one-five/star-c8c96060df21974480b2cd936160a5bae964f991a4245ef146da1c67ca07cc32.svg)
     no-repeat;
   background-size: 13px;
   pointer-events: none;
@@ -9074,7 +9074,7 @@ div.notice a:visited {
   }
 }
 
-.auth-sidebar header .dribbble-logo {
+.auth-sidebar header .acroportal-logo {
   width: 90px;
   height: auto;
   fill: currentColor;
@@ -9458,5 +9458,38 @@ main {
     background: url('./assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png') no-repeat;
     background-size: cover;
     background-position: center;
+  }
+}
+
+/* Style for the checkbox */
+input[type="checkbox"] {
+  /* Hide the default checkbox */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Define the size of the checkbox */
+  width: 20px;
+  height: 20px;
+  /* Border and background styles */
+  border: 2px solid #245ba8;
+  background-color: white; /* Initially set to white */
+  /* Position relative to create a stacking context for pseudo-elements */
+  position: relative;
+  /* Style for the custom checkmark */
+  &:checked {
+    background-color: #245ba8; /* Change to blue when checked */
+    /* Color and size of the checkmark */
+    &::before {
+      content: '\2713'; /* Unicode character for a checkmark */
+      display: block;
+      /* Position the checkmark in the center */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* Color of the checkmark */
+      color: white;
+      font-size: 14px;
+    }
   }
 }
