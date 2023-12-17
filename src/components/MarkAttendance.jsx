@@ -3,6 +3,8 @@ import UserContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from "react-spinners";
+
 
 export default function MarkAttendance(props) {
     const { SetAlert } = props;
@@ -13,43 +15,50 @@ export default function MarkAttendance(props) {
     const [selectedStudents, setSelectedStudents] = useState([]);
     const [showStudents, setShowStudents] = useState(true);
     const context = useContext(UserContext);
+    const [loading, setLoading] = useState(true); // Add loading state
     const now = new Date();
     const host = import.meta.env.VITE_BACKEND_URL
     const [selectAll, setSelectAll] = useState(false);
     const [selectedUserDetails, setSelectedUserDetails] = useState(null);
-    const { userType } = context;
+    const { userType,authenticated } = context;
     const navigate = useNavigate();
-    const token = localStorage.getItem('Authorization');
+    const token = localStorage.getItem('authToken');
+    
     useEffect(() => {
-        if (userType === 'Student') {
-            navigate('/viewattendance')
-        }
-        const fetchsubjects = async () => {
-            const response = await fetch(`${host}/attendance/getsubjects`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token
-                },
-            });
-            const res = await response.json();
-            setSubjects(res.results);
-        };
-        const fetchUsers = async () => {
-            const response = await fetch(`${host}/user/getallusers`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': token
-                },
-            });
-            const res = await response.json();
-            setUsers(res.results);
-        }
+        const fetchData = async () =>{
+            try{
+                if (userType === 'Student') {
+                    navigate('/viewattendance')
+                }
+                const fetchsubjects = await fetch(`${host}/attendance/getsubjects`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                });
+                const res = await fetchsubjects.json();
+                setSubjects(res.results);
 
-        fetchUsers();
-        fetchsubjects();
-    }, [context]);
+                const fetchUsers = await fetch(`${host}/user/getallusers`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                    },
+                });
+                const res_api = await fetchUsers.json();
+                setUsers(res_api.results);
+                setLoading(false);
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                toast.error('Error fetching data:',{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
+                setLoading(false);
+            }
+        }
+        fetchData();
+    }, [context,token]);
 
 
     const onclickUser = (currentUser) => {
@@ -127,6 +136,7 @@ export default function MarkAttendance(props) {
         }
         else if (res.message) {
             // SetAlert(res.message, 'success')
+            console.log(res.message);
             toast.success(res.message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20})
         }
         else {
@@ -172,9 +182,17 @@ export default function MarkAttendance(props) {
         modal.show();
     };
 
+    if (loading) {
+        return (
+            <div className="sweet-loading" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <ClipLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" />
+            </div>
+        );
+    }
 
     return (
-        <div className="mark-attendance-container">
+        <div>
+        {authenticated ? (<div className="mark-attendance-container">
             <h2 className="mark-attendance-heading"><strong>MARK ATTENDANCE</strong></h2>
             <form className="mark-attendance-form">
                 <div className="d-flex">
@@ -219,7 +237,7 @@ export default function MarkAttendance(props) {
             </form>
             <div className="form-check">
                 <input
-                    style={{ border: '2px solid' }}
+                    style={{ border: '2px solid'}}
                     type="checkbox"
                     className="form-check-input"
                     id="selectAllCheckbox"
@@ -272,11 +290,24 @@ export default function MarkAttendance(props) {
                             )}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button style={{backgroundColor:'#245ba8'}} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>):
+        (
+            <div className="sweet-loading" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <ClipLoader
+                color={'#4285f4'}
+                loading={true}
+                size={150}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            />
+        </div>
+        )
+        }
         </div>
     );
 };

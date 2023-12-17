@@ -4,6 +4,7 @@ import UserContext from '../context/userContext';
 // import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from "react-spinners";
 
 const Login = (props) => {
     const { SetAlert } = props;
@@ -12,10 +13,9 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [secretkey, setSecretKey] = useState('');
     const [showSecretKey, setShowSecretKey] = useState(false);
+    const [loading, setLoading] = useState(false); // Add loading state
     const navigate = useNavigate();
     const host = import.meta.env.VITE_BACKEND_URL
-
-    const notify = () => toast("Wow so easy!");
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -23,60 +23,81 @@ const Login = (props) => {
         const hasNumbers = /\d/.test(e.target.value);
         setShowSecretKey(!hasNumbers);
     };
+
     const handleOnSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${host}/user/getuser`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: email }),
-        });
-        const res = await response.json();
-        if (res.results === true) {
-            updatedMail(email);
-            navigate('/enterpassword');
-            // SetAlert('Email Verified', 'success');
-            toast.success('Email Verified',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
-        }
-        else if (res.results === false) {
-            updatedMail(email);
-            navigate('/register');
-            // SetAlert('Please Register', 'primary');
-            toast.info('Please Register',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
-        }
-        else {
-            if (Array.isArray(res)) {
-                // If it's an array, loop through it
-                res.forEach((element) => {
+        setLoading(true);
+        localStorage.setItem('userEmail',email);
+        try{
+            const response = await fetch(`${host}/user/getuser`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: email }),
+            });
+            const res = await response.json();
+            if (res.results === true) {
+                updatedMail(email);
+                navigate('/enterpassword');
+                // SetAlert('Email Verified', 'success');
+                toast.success('Email Verified',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
+            }
+            else if (res.results === false) {
+                updatedMail(email);
+                navigate('/register');
+                // SetAlert('Please Register', 'primary');
+                toast.info('Please Register',{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
+            }
+            else {
+                if (Array.isArray(res)) {
+                    // If it's an array, loop through it
+                    res.forEach((element) => {
+                        let message;
+    
+                        if (element.message) {
+                            message = element.message;
+                        } else if (element.errors) {
+                            message = element.errors;
+                        }
+                        // SetAlert(message, 'danger');
+                        toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
+                    });
+                } else {
+                    // If it's not an array, handle individual case
                     let message;
-
-                    if (element.message) {
-                        message = element.message;
-                    } else if (element.errors) {
-                        message = element.errors;
+    
+                    if (res.message) {
+                        message = res.message;
+                    } else if (res.errors) {
+                        message = res.errors;
                     }
                     // SetAlert(message, 'danger');
-                    toast.error(message,{ autoClose: 1300, style: {fontSize:'18px'},draggablePercent: 20});
-                });
-            } else {
-                // If it's not an array, handle individual case
-                let message;
-
-                if (res.message) {
-                    message = res.message;
-                } else if (res.errors) {
-                    message = res.errors;
-                }
-                // SetAlert(message, 'danger');
-                toast.error(message,{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
+                    toast.error(message,{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
+                };
             };
-        };
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            toast.error('Error fetching data:',{ autoClose: 1300, style: {fontSize:'500px'},draggablePercent: 20});
+        } finally {
+            setLoading(false);
+        }
     };
 
+    // if (loading) {
+    //     return (
+    //         <div className="sweet-loading" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    //             <ClipLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" />
+    //         </div>
+    //     );
+    // }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+        handleOnSubmit(e);  // Call your custom form submission logic
+    };
 
     return (
-      
         <div id="main-container">
             <section className="auth-sidebar">
                 <div className="auth-sidebar-content">
@@ -89,6 +110,8 @@ const Login = (props) => {
                         autoPlay
                         loop
                         muted
+                        controls={false}
+                        preload="none"
                         src="https://cdn.dribbble.com/uploads/48226/original/b8bd4e4273cceae2889d9d259b04f732.mp4?1689028949"
                     ></video>
                     <a style={{display:"none"}} className="auth-sidebar-credit">
@@ -115,7 +138,7 @@ const Login = (props) => {
                         </div>
                         {/* <hr className="divider sign-in" /> */}
                         <div className="auth-form sign-in-form">
-                            <form action="/session" acceptCharset="UTF-8" method="post">
+                            <form onSubmit={handleFormSubmit}>
                                 <label htmlFor="email">Email</label>
                                 <input
                                     type="email"
@@ -128,7 +151,18 @@ const Login = (props) => {
                                     style={{fontWeight:'bold'}}
                                 />
                             </form>
-                            <button onClick={handleOnSubmit} className='btn2 btn2--large btn2--full-width margin-t-20 btncustom' type="submit"><strong>Continue</strong>
+                            {/* <button onClick={handleOnSubmit} className='btn2 btn2--large btn2--full-width margin-t-20 btncustom' type="submit"><strong>Continue</strong></button> */}
+                            <button
+                                onClick={handleOnSubmit}
+                                className='btn2 btn2--large btn2--full-width margin-t-20 btncustom'
+                                type="submit"
+                                disabled={loading}
+                            >
+                                {loading ? (
+                                    <ClipLoader color={'#4285f4'} loading={true} size={35} />
+                                ) : (
+                                    <strong>Continue</strong>
+                                )}
                             </button>
                         </div>
                     </div>
