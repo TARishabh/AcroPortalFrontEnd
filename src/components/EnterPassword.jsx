@@ -4,7 +4,7 @@ import UserContext from '../context/userContext';
 // import backgroundImage from '../assets/abstract-blue-transparent-flow-wave-with-shadow-design-element_206325-733.png';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, PacmanLoader } from "react-spinners";
 
 export default function EnterPassword(props) {
     const { SetAlert } = props;

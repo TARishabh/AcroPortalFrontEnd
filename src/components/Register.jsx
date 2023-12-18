@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from '../context/userContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, PacmanLoader } from "react-spinners";
 
 export default function Register(props) {
     const userContext = useContext(UserContext);

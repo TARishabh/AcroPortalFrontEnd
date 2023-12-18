@@ -1,7 +1,7 @@
 import React, { useState, CSSProperties, useContext, useEffect } from 'react'
 import UserContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, PacmanLoader } from "react-spinners";
 
 
 export default function ViewAttendance(props) {
@@ -93,7 +93,8 @@ export default function ViewAttendance(props) {
     if (loading) {
         return (
             <div className="sweet-loading" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <ClipLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" />
+                {/* <ClipLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" /> */}
+                <PacmanLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" />
             </div>
         );
     }

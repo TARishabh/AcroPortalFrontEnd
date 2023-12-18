@@ -3,7 +3,7 @@ import UserContext from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ClipLoader } from "react-spinners";
+import { ClipLoader, PacmanLoader } from "react-spinners";
 import { Link } from 'react-router-dom';
 
 export default function MarkAttendance(props) {
@@ -53,7 +53,7 @@ export default function MarkAttendance(props) {
 
             } catch (error) {
                 console.error('Error fetching data:', error);
-                toast.error('Error fetching data:', { autoClose: 1300, style: { fontSize: '500px' }, draggablePercent: 20 });
+                toast.error('Error fetching data:', { autoClose: 1300, style: { fontSize: '18px' }, draggablePercent: 20 });
             } finally {
                 setLoading(false);
             }
@@ -180,7 +180,7 @@ export default function MarkAttendance(props) {
             };
         } catch (error) {
             console.error('Error fetching data:', error);
-            toast.error('Error fetching data:', { autoClose: 1300, style: { fontSize: '500px' }, draggablePercent: 20 });
+            toast.error('Error fetching data:', { autoClose: 1300, style: { fontSize: '18px' }, draggablePercent: 20 });
         } finally {
             setButtonLoader(false);
         }
@@ -202,7 +202,8 @@ export default function MarkAttendance(props) {
     if (loading) {
         return (
             <div className="sweet-loading" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-                <ClipLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" />
+                {/* <ClipLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" /> */}
+                <PacmanLoader color={'#4285f4'} loading={true} size={150} aria-label="Loading Spinner" data-testid="loader" />
             </div>
         );
     }
