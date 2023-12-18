@@ -12,7 +12,7 @@ export default function Register(props) {
     const [secretkey, setSecretKey] = useState('');
     const navigate = useNavigate();
     const [email, setEmail] = useState(localStorage.getItem('userEmail') || userContext.email || '');
-    const [showSecretKey, setShowSecretKey] = useState(false);
+    const [showSecretKey, setShowSecretKey] = useState(true);
     const [password, setPassword] = useState('');
     const [confirmpassword, setconfirmPassword] = useState('');
     const [firstname, setFirstName] = useState('');
@@ -33,13 +33,21 @@ export default function Register(props) {
         setShowSecretKey(!hasNumbers);
     };
 
+
+    const checkEmailNumber = (email) => {
+        const hasNumbers = /\d/.test(email);
+        setShowSecretKey(!hasNumbers);
+    };
+
     const checkPasswordMatch = () => {
         setCheckState(password === confirmpassword);
     };
 
     useEffect(() => {
         checkPasswordMatch();
-    }, [password, confirmpassword]);
+        checkEmailNumber(email);
+
+    }, [password, confirmpassword,email]);
 
     const handleCheckState = async (e) => {
         e.preventDefault();

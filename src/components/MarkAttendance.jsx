@@ -277,10 +277,12 @@ export default function MarkAttendance(props) {
                     </label>
                 </div>
 
+                
+
                 <div className="container custom-margin-user-container d-flex flex-wrap student-cards-container">
                     {showStudents &&
                         users
-                            .sort((a, b) => parseInt(a.enrollment_number.slice(10, 12)) - parseInt(b.enrollment_number.slice(11, 13)))
+                            .sort((a, b) => parseInt(a.enrollment_number.slice(9, 12)) - parseInt(b.enrollment_number.slice(11, 13)))
                             .map((user) => (
                                 <div key={user._id} className="card student-card">
                                     <button
