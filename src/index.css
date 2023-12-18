@@ -9493,3 +9493,13 @@ input[type="checkbox"] {
     }
   }
 }
+
+.simple-link {
+  color: #007bff; /* Link color */
+  text-decoration: underline; /* Underline for the link */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.simple-link:hover {
+  color: #1a4a7b; /* Darker color on hover */
+}
